@@ -13,7 +13,7 @@ RUN pip install geopy==0.95.1 BeautifulSoup
 RUN git clone -b master https://github.com/ingadhoc/odoo-academic
 
 # OCA addons
-RUN git clone -b master https://github.com/OCA/server-tools
+RUN git clone -b 8.0 https://github.com/OCA/server-tools
 RUN git clone -b master https://github.com/OCA/banking
 RUN git clone -b master https://github.com/OCA/account-financial-tools
 RUN git clone -b master https://github.com/OCA/web
