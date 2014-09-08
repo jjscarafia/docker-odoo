@@ -1,8 +1,9 @@
 FROM adhoc/odoo-base
 MAINTAINER Damian Soriano <ds@ingadhoc.com>
 
-ENV REFRESHED_AT 2014-08-30
+ENV REFRESHED_AT 2014-09-08
 
+USER root
 RUN apt-get update && \
     apt-get install -y python-pip python-dev build-essential libpq-dev \
     poppler-utils antiword libldap2-dev libsasl2-dev libssl-dev git \
@@ -19,4 +20,4 @@ RUN python setup.py install
 
 RUN sudo -H -u odoo /opt/odoo/server/odoo.py --stop-after-init -s -c /opt/odoo/server/odoo.conf --db_host=odoo-db --db_user=odoo --db_password=odoo
 
-CMD ["sudo -H -u odoo /opt/odoo/server/odoo.py -c /opt/odoo/server/odoo.conf"]
+CMD ["sudo", "-H", "-u", "odoo", "/opt/odoo/server/odoo.py", "-c", "/opt/odoo/server/odoo.conf"]
