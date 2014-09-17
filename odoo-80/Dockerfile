@@ -1,7 +1,7 @@
 FROM adhoc/odoo-base
 MAINTAINER Damian Soriano <ds@ingadhoc.com>
 
-ENV REFRESHED_AT 2014-09-08
+ENV REFRESHED_AT 2014-09-17
 
 USER root
 RUN apt-get update && \
