@@ -18,6 +18,6 @@ WORKDIR /opt/odoo/server/
 RUN git checkout 8.0
 RUN python setup.py install
 
-RUN sudo -H -u odoo /opt/odoo/server/odoo.py --stop-after-init -s -c /opt/odoo/server/odoo.conf --db_host=odoo-db --db_user=odoo --db_password=odoo
+RUN sudo -H -u odoo /opt/odoo/server/odoo.py --stop-after-init -s -c /opt/odoo/odoo.conf --db_host=odoo-db --db_user=odoo --db_password=odoo
 
-CMD ["sudo", "-H", "-u", "odoo", "/opt/odoo/server/odoo.py", "-c", "/opt/odoo/server/odoo.conf"]
+CMD ["sudo", "-H", "-u", "odoo", "/opt/odoo/server/odoo.py", "-c", "/opt/odoo/odoo.conf"]
