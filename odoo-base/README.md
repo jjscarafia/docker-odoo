@@ -1,4 +1,4 @@
-docker-odoo
+odoo-base
 ===========
 
-Docker configuration for Odoo
+Base Docker image for Odoo
