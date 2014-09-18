@@ -12,8 +12,7 @@ RUN apt-get update && \
     python-pyparsing python-reportlab python-tz python-vatnumber python-vobject \
     python-webdav python-xlwt python-yaml python-zsi python-docutils python-unittest2 \
     python-mock python-jinja2 libevent-dev libxslt1-dev libfreetype6-dev libjpeg8-dev \
-    python-werkzeug wkhtmltopdf libjpeg-dev 
-
+    python-werkzeug wkhtmltopdf libjpeg-dev build-essential
 WORKDIR /opt/odoo/server/
 RUN git checkout saas-2
 RUN python setup.py install
