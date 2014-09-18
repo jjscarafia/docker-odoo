@@ -29,10 +29,6 @@ RUN pip install genshi==0.6.1 http://launchpad.net/aeroolib/trunk/1.0.0/+downloa
 RUN git clone https://github.com/OCA/server-tools
 RUN git clone https://github.com/OCA/web
 
-## Create db odoo user
-USER postgres
-createuser -d odoo
-
 ## Create conf file
 RUN sudo -H -u odoo /opt/odoo/server/odoo.py --stop-after-init -s -c /opt/odoo/odoo.conf --db_host=localhost --db_user=odoo --db_password=False --workers=9 --addons-path=/opt/odoo/server/openerp/addons,/opt/odoo/server/addons,/opt/odoo/sources/odoo-addons,/opt/odoo/sources/odoo-argentina,/opt/odoo/sources/odoo-web,/opt/odoo/sources/server-tools,/opt/odoo/sources/web,/opt/odoo/sources/aeroo_reports
 

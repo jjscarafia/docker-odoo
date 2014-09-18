@@ -1,6 +1,5 @@
-docker-odoo-adhoc
+docker-odoo-adhoc (not functional yet)
 =================
-
 This is an image that allows you to launch the odoo v8 container with postgres included. 
 It also has all modules commonly used by ADHOC S.A.
 This repositories are:
