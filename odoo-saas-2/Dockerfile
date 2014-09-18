@@ -3,6 +3,7 @@ MAINTAINER Damian Soriano <ds@ingadhoc.com>
 
 ENV REFRESHED_AT 2014-09-17
 
+## No pude hacer andar esta build :(
 USER root
 RUN apt-get update && \
     apt-get install -y python-pip python-dev build-essential libpq-dev \
@@ -21,6 +22,9 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/
 RUN ln -s /usr/include/freetype2 /usr/include/freetype
 
 WORKDIR /opt/odoo/server/
+# Tratamos de instalar primero la 8 y luego la saas-2 a ver si anda
+RUN git checkout 8.0
+RUN python setup.py install
 RUN git checkout saas-2
 RUN python setup.py install
 
