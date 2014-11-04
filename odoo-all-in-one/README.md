@@ -8,7 +8,7 @@ Configuration
 
 Launch the container with:
 
-    sudo docker run --rm -ti -p 8069:8069 odoo-all-in-one /bin/bash
+    sudo docker run --rm -ti -p 8069:8069 adhoc/odoo-all-in-one /bin/bash
 
 the --rm will remove the container once it is stopped.
 
@@ -24,7 +24,7 @@ If you want to maintain the information of the database the container should be 
     sudo docker run --rm -ti -p 8069:8069 \
         -v /your/local/data/directory:/var/lib/postgresql/data \
         -v /your/local/log/directory:/var/log/postgresql postgres:9.3 \
-        odoo-all-in-one /bin/bash
+        adhoc/odoo-all-in-one /bin/bash
 
 Development
 -----------
@@ -33,6 +33,6 @@ If you want to use this docker image for development, you can launch it using:
 
     sudo docker run --rm -ti -p 8069:8069 \
         -v /your/local/repo:/opt/odoo/sources/addons \
-        odoo-all-in-one /bin/bash
+        adhoc/odoo-all-in-one /bin/bash
 
 where /your/local/repo is your currently cloned repository of some module. This will allow you to change the code of the module locally without the need of creating an image every time you modify the module.
