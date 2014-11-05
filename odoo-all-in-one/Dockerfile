@@ -35,20 +35,25 @@ RUN apt-get install -y python-pip python-dev build-essential libpq-dev \
 RUN mkdir -p /opt/odoo/sources
 WORKDIR /opt/odoo/sources
 
-RUN git clone https://github.com/ingadhoc/odoo-addons.git
 RUN apt-get install -y swig
 RUN pip install M2Crypto suds
-RUN git clone https://github.com/ingadhoc/odoo-argentina.git
+RUN git clone https://github.com/ingadhoc/odoo-addons.git
+
 RUN pip install geopy==0.95.1 BeautifulSoup
+RUN git clone https://github.com/ingadhoc/odoo-argentina.git
+
 RUN git clone https://github.com/ingadhoc/odoo-web.git
-RUN git clone https://github.com/ingadhoc/aeroo_reports.git
-RUN pip install genshi==0.6.1 http://launchpad.net/aeroolib/trunk/1.0.0/+download/aeroolib.tar.gz
+
+RUN apt-get install -y libcups2-dev
+RUN pip install git+https://github.com/aeroo/aeroolib.git@master pycups
+
+RUN git clone https://github.com/aeroo/aeroo_reports.git
 RUN git clone https://github.com/OCA/server-tools
 RUN git clone https://github.com/OCA/web
 
 #################################################
 ## aeroo docs
-RUN apt-get install -y libcups2-dev python3-pip
+RUN apt-get install -y python3-pip
 RUN pip3 install daemonize jsonrpc2
 RUN git clone https://github.com/aeroo/aeroo_docs.git /opt/odoo/aeroo_docs
 #TODO correr el proceso de aeroo docs
