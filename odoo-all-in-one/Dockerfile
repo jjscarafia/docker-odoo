@@ -1,33 +1,21 @@
-FROM ubuntu:14.04
+FROM adhoc/odoo:8.0
 MAINTAINER Damian Soriano <ds@ingadhoc.com>
 
 ENV REFRESHED_AT 2014-05-11
 
-RUN apt-get clean
-RUN apt-get update
-RUN apt-get upgrade -y
-
-RUN apt-get update && apt-get install -y postgresql-9.3 
-
-RUN apt-get update && apt-get install -y git
-RUN apt-get update && apt-get install -y python-pip
-
-RUN mkdir -p /opt/odoo
-
-RUN useradd -m -p odoo odoo
-RUN chown -R odoo.odoo /opt/odoo/
-USER odoo
-RUN git clone https://github.com/odoo/odoo.git /opt/odoo/server
-
 USER root
-RUN apt-get install -y python-pip python-dev build-essential libpq-dev \
-    poppler-utils antiword libldap2-dev libsasl2-dev libssl-dev git \
-    python-dateutil python-feedparser python-gdata python-ldap python-lxml \
-    python-mako python-openid python-psycopg2 python-pychart python-pydot \
-    python-pyparsing python-reportlab python-tz python-vatnumber python-vobject \
-    python-webdav python-xlwt python-yaml python-zsi python-docutils python-unittest2 \
-    python-mock python-jinja2 libevent-dev libxslt1-dev libfreetype6-dev libjpeg8-dev \
-    python-werkzeug wkhtmltopdf libjpeg-dev
+
+# Update odoo server
+WORKDIR /opt/odoo/server/
+RUN git pull
+RUN git checkout 8.0
+RUN python setup.py install
+
+# Update apt-get
+RUN apt-get update
+
+# Install postgres
+RUN apt-get install -y postgresql-9.3 
 
 #################################################3
 ## Git repositories and python dependencies
@@ -57,10 +45,6 @@ RUN apt-get install -y python3-pip
 RUN pip3 install daemonize jsonrpc2
 RUN git clone https://github.com/aeroo/aeroo_docs.git /opt/odoo/aeroo_docs
 #TODO correr el proceso de aeroo docs
-
-WORKDIR /opt/odoo/server/
-RUN git checkout 8.0
-RUN python setup.py install
 
 RUN sudo -H -u odoo /opt/odoo/server/odoo.py --stop-after-init -s -c /opt/odoo/odoo.conf --db_host=localhost --db_user=odoo --db_password=odoo --addons-path=/opt/odoo/server/openerp/addons,/opt/odoo/server/addons,/opt/odoo/sources/odoo-addons,/opt/odoo/sources/odoo-argentina,/opt/odoo/sources/odoo-web,/opt/odoo/sources/server-tools,/opt/odoo/sources/web,/opt/odoo/sources/aeroo_reports
 #TODO correr un nginx para poder utilizar workers y el chat
