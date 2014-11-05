@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 MAINTAINER Damian Soriano <ds@ingadhoc.com>
 
-ENV REFRESHED_AT 2014-01-11
+ENV REFRESHED_AT 2014-05-11
 
 RUN apt-get clean
 RUN apt-get update
