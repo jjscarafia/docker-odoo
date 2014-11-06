@@ -5,17 +5,18 @@ ENV REFRESHED_AT 2014-06-11
 
 USER root
 
+RUN apt-get clean
+RUN apt-get update
+RUN apt-get upgrade -y
+
+# Install postgres
+RUN apt-get install -y postgresql-9.3 
+
 # Update odoo server
 WORKDIR /opt/odoo/server/
 RUN git pull
 RUN git checkout 8.0
 RUN python setup.py install
-
-# Update apt-get
-RUN apt-get update
-
-# Install postgres
-RUN apt-get install -y postgresql-9.3 
 
 #################################################3
 ## Git repositories and python dependencies
