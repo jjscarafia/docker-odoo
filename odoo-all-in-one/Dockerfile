@@ -54,15 +54,7 @@ RUN sudo -H -u odoo /opt/odoo/server/odoo.py --stop-after-init -s -c /opt/odoo/o
 USER postgres
 RUN service postgresql start && psql -c "CREATE USER odoo WITH PASSWORD 'odoo';" && psql -c "ALTER USER odoo WITH SUPERUSER;"
 
-#TODO ver si esto lo podemos evitar, son arreglos por encode utf8
-RUN service postgresql start && psql -c "update pg_database set datallowconn = TRUE where datname = 'template0';"
-RUN service postgresql start && psql -c "\c template0;"
-RUN service postgresql start && psql -c "update pg_database set datistemplate = FALSE where datname = 'template1';"
-RUN service postgresql start && psql -c "drop database template1;"
-RUN service postgresql start && psql -c "create database template1 with template = template0 encoding = 'UTF8';"
-RUN service postgresql start && psql -c "update pg_database set datistemplate = TRUE where datname = 'template1';"
-RUN service postgresql start && psql -c "\c template1"
-RUN service postgresql start && psql -c "update pg_database set datallowconn = FALSE where datname = 'template0';"
+RUN service postgresql start && psql -c "update pg_database set encoding = 6, datcollate = 'C', datctype = 'C' where datname in ('template0', 'template1', 'postgres');"
 
 #TODO ver si podemos crear esta base de datos demo, la crea pero luego me da error, al replicarlo logueado me funciona bien
 #RUN service postgresql start && createdb -O odoo demo_ar
