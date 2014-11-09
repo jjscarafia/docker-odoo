@@ -71,6 +71,7 @@ RUN service postgresql start && psql -c "update pg_database set datallowconn = F
 USER root
 #RUN service postgresql start && sudo -H -u odoo /opt/odoo/server/odoo.py --stop-after-init -c /opt/odoo/odoo.conf -i l10n_ar_base,adhoc_base_setup -d demo_ar --load-language=es_AR
 
+# Fix AUFL issue regarding permissions
 RUN mv /etc/ssl/private /etc/ssl/private-2
 RUN mv /etc/ssl/private-2 /etc/ssl/private
 
