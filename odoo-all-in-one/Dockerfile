@@ -67,4 +67,9 @@ USER root
 RUN mv /etc/ssl/private /etc/ssl/private-2
 RUN mv /etc/ssl/private-2 /etc/ssl/private
 
+USER postgres
+RUN service postgresql start && createdb -O odoo demo_ar
+USER root
+RUN service postgresql start && sudo -H -u odoo /opt/odoo/server/odoo.py --stop-after-init -c /opt/odoo/odoo.conf -i l10n_ar_base,adhoc_base_setup -d demo_ar --load-language=es_AR
+
 CMD "service postgresql start && sudo -H -u odoo /opt/odoo/server/odoo.py -c /opt/odoo/odoo.conf"
