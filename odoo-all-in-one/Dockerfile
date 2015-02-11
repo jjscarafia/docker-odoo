@@ -1,7 +1,7 @@
 FROM adhoc/odoo:8.0
 MAINTAINER Damian Soriano <ds@ingadhoc.com>
 
-ENV REFRESHED_AT 2014-06-11
+ENV REFRESHED_AT 2014-15-12
 
 USER root
 
