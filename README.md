@@ -1,5 +1,6 @@
-docker-odoo
-===========
+#docker-odoo (depreciated)
+
+USE THIS PROJET INSTEAD https://github.com/ingadhoc/docker-odoo-adhoc
 
 This repository contains various configuration for the odoo
 
